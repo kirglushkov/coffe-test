@@ -1,7 +1,6 @@
 export type Item = {
   numberOfDrinks: number
   size: string,
-  img: string
 }
 
 export const useItems = () => useState<Item[]>('items', () => [])
