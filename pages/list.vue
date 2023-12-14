@@ -37,7 +37,11 @@ const decreaseValue = (item: Item) => {
 }
 
 const sortedItems = computed(() => {
-  const sorted = {}
+  interface SortedItems {
+  [key: string]: any[];
+}
+
+  const sorted: SortedItems = {}
   for (const item of Items.value) {
     if (!sorted[item.size]) {
       sorted[item.size] = []

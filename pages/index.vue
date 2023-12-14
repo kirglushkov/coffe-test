@@ -50,12 +50,14 @@ const addToStorage = () => {
       <h2 class="text-lg font-semibold mb-2">
         Number of Drinks
       </h2>
-      <button v-for="numberOfDrinks in data[selectedIndex].numberOfDrinks" :key="numberOfDrinks" :class="{ 'bg-blue-500 text-white': selectedNumberOfDrinks === numberOfDrinks }" class="px-4 py-2 rounded-md mr-2 mb-2 hover:bg-blue-700" @click="selectNumberOfDrinks(numberOfDrinks)">
-        {{ numberOfDrinks }}
-      </button>
+      <template v-if="data">
+        <button v-for="numberOfDrinks in data[selectedIndex].numberOfDrinks" :key="numberOfDrinks" :class="{ 'bg-blue-500 text-white': selectedNumberOfDrinks === numberOfDrinks }" class="px-4 py-2 rounded-md mr-2 mb-2 hover:bg-blue-700" @click="selectNumberOfDrinks(numberOfDrinks)">
+          {{ numberOfDrinks }}
+        </button>
+      </template>
     </div>
     <div class="photo">
-      <img :src="data[selectedIndex].img" alt="">
+      <img v-if="data" :src="data[selectedIndex].img" alt="">
     </div>
 
     <button class="add-button bg-blue-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-blue-700" @click="addToStorage">
