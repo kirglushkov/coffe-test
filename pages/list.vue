@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { Item } from '~~/composables/states'
 
-const Items = useItems()
+const Items = useItemsStore()
 
 const increaseValue = (item: Item) => {
   item.numberOfDrinks++
@@ -42,7 +42,7 @@ const sortedItems = computed(() => {
 }
 
   const sorted: SortedItems = {}
-  for (const item of Items.value) {
+  for (const item of Items.items) {
     if (!sorted[item.size]) {
       sorted[item.size] = []
     }

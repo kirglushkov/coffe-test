@@ -3,30 +3,30 @@
 import { ref } from 'vue'
 
 const { data } = await useFetch('/api/config')
-const Items = useItems()
+const Items = useItemsStore()
 const selectedSize = ref('standard')
 const selectedNumberOfDrinks = ref(6)
 const selectedIndex = ref(0)
 
 const selectSize = (size: string) => {
   selectedSize.value = size
+  Items.selectSize(size)
 }
 
 const selectNumberOfDrinks = (numberOfDrinks: number) => {
   selectedNumberOfDrinks.value = numberOfDrinks
+  Items.selectNumberOfDrinks(numberOfDrinks)
 }
 
 const addToStorage = () => {
-  Items.value.push({
-    size: selectedSize.value,
-    numberOfDrinks: selectedNumberOfDrinks.value
-  })
+  Items.addToStorage()
 }
 
 </script>
 
 <template>
   <div class="container">
+    <TheCounter />
     <h1 class="text-3xl font-bold mb-4">
       Configuration Header
     </h1>
@@ -64,7 +64,7 @@ const addToStorage = () => {
       Add to Storage
     </button>
     <ul class="mt-4">
-      <li v-for="item in Items" :key="item.size + item.numberOfDrinks" class="mb-1">
+      <li v-for="(item, index) in Items.items" :key="index" class="mb-1">
         {{ item.size }} - {{ item.numberOfDrinks }}
       </li>
     </ul>
